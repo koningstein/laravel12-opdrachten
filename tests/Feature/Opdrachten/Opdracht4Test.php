@@ -22,6 +22,7 @@ test('The project admin index page shows all projects', function() {
     foreach ($projects as $project) {
         $response->assertSee((string)$project->id);
         $response->assertSee($project->name); // Voeg false toe als je exacte matches wilt vermijden
+        $response->assertSee(Str::limit($project->description, 50));
     }
     $response->assertStatus(200);
 })->group('Opdracht4');
@@ -37,6 +38,7 @@ test('The project admin index page shows all projects from Seeder', function() {
     foreach ($projects as $project) {
         $response->assertSee((string)$project->id);
         $response->assertSee($project->name); // Voeg false toe als je exacte matches wilt vermijden
+        $response->assertSee(Str::limit($project->description, 50));
     }
     $response->assertStatus(200);
 })->group('Opdracht4');
