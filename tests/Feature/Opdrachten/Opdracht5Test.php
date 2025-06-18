@@ -81,12 +81,12 @@ test('Mass assignment is not possible', function () {
     ]);
 })->group('Opdracht5');
 
-test('The Project model should have correctly set fillable attributes', function () {
+test('The Project model should have correctly set guarded attributes', function () {
     $project = new Project();
 
-    // List of fields expected to be fillable
-    $expectedFillable = ['name', 'description'];
+    // List of fields expected to be guarded
+    $expectedGuarded = ['name', 'description'];
 
-    // Assert that the actual fillable fields in the model match the expected fillable fields
-    $this->assertEquals($expectedFillable, $project->getFillable());
+    // Assert that the actual guarded fields in the model match the expected guarded fields
+    $this->assertEquals($expectedGuarded, $project->getGuarded());
 })->group('Opdracht5');
