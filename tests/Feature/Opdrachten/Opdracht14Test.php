@@ -5,6 +5,8 @@ use App\Models\Project;
 use Illuminate\Support\Str;
 use \Pest\Laravel;
 use Illuminate\Support\Facades\Auth;
+use App\Livewire\Auth\Login;
+use Livewire\Livewire;
 
 beforeEach(function (){
     $this->seed('RoleAndPermissionSeeder');
@@ -52,57 +54,51 @@ test('custom 403 error page is displayed for unauthorized access', function () {
 
 test('admin is redirected to home page after login', function () {
     $user = User::where('email', 'admin@school.nl')->first();
-
     // Controleer of de gebruiker correct is opgehaald
     expect($user)->not->toBeNull();
-
-    // Simuleer een POST request naar de login route met de admin gebruikersgegevens
-    $response = $this->post('/login', [
-        'email' => 'admin@school.nl',
-        'password' => 'admin'
-    ]);
-
+    // Test het Livewire Login component
+    $response = Livewire::test(Login::class)
+        ->set('email', 'admin@school.nl')
+        ->set('password', 'admin')
+        ->call('login');
+    // Assert dat er geen validatiefouten zijn
+    $response->assertHasNoErrors();
     // Assert dat de gebruiker correct wordt doorgestuurd naar de home route
-    $response->assertRedirect(route('home'));
-
+    $response->assertRedirect(route('home', absolute: false));
     // Controleer of de gebruiker is geauthenticeerd
     $this->assertAuthenticatedAs($user);
 })->group('Opdracht14');
 
 test('teacher is redirected to home page after login', function () {
     $user = User::where('email', 'teacher@school.nl')->first();
-
     // Controleer of de gebruiker correct is opgehaald
     expect($user)->not->toBeNull();
-
-    // Simuleer een POST request naar de login route met de admin gebruikersgegevens
-    $response = $this->post('/login', [
-        'email' => 'teacher@school.nl',
-        'password' => 'teacher'
-    ]);
-
+    // Test het Livewire Login component
+    $response = Livewire::test(Login::class)
+        ->set('email', 'teacher@school.nl')
+        ->set('password', 'teacher')
+        ->call('login');
+    // Assert dat er geen validatiefouten zijn
+    $response->assertHasNoErrors();
     // Assert dat de gebruiker correct wordt doorgestuurd naar de home route
-    $response->assertRedirect(route('home'));
-
+    $response->assertRedirect(route('home', absolute: false));
     // Controleer of de gebruiker is geauthenticeerd
     $this->assertAuthenticatedAs($user);
 })->group('Opdracht14');
 
 test('student is redirected to home page after login', function () {
     $user = User::where('email', 'student@school.nl')->first();
-
     // Controleer of de gebruiker correct is opgehaald
     expect($user)->not->toBeNull();
-
-    // Simuleer een POST request naar de login route met de admin gebruikersgegevens
-    $response = $this->post('/login', [
-        'email' => 'student@school.nl',
-        'password' => 'student'
-    ]);
-
+    // Test het Livewire Login component
+    $response = Livewire::test(Login::class)
+        ->set('email', 'student@school.nl')
+        ->set('password', 'student')
+        ->call('login');
+    // Assert dat er geen validatiefouten zijn
+    $response->assertHasNoErrors();
     // Assert dat de gebruiker correct wordt doorgestuurd naar de home route
-    $response->assertRedirect(route('home'));
-
+    $response->assertRedirect(route('home', absolute: false));
     // Controleer of de gebruiker is geauthenticeerd
     $this->assertAuthenticatedAs($user);
 })->group('Opdracht14');
