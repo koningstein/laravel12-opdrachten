@@ -39,19 +39,100 @@ test('tasks index page displays correct data', function () {
     }
 })->group('Opdracht19');
 
-// Test of de tasks index pagina niet-inclusieve gebruikersnaam weergeeft als N/A
-test('tasks index page displays N/A for non-associated user', function () {
-    $task = Task::factory()->create(['user_id' => null]);
+// Test specifiek voor taken zonder gebruiker (user_id = null)
+test('tasks index page displays N/A for tasks without user', function () {
+    // Maak een taak aan zonder gebruiker
+    $task = Task::factory()->create([
+        'user_id' => null,
+        'project_id' => Project::first()->id,
+        'activity_id' => Activity::first()->id,
+    ]);
+
     // Haal het totale aantal pagina's op
     $totalTasks = Task::count();
     $tasksPerPage = 15;
     $lastPage = (int) ceil($totalTasks / $tasksPerPage);
 
-    // Haal de laatste pagina op en controleer de aanwezigheid van 'N/A'
+    // Haal de laatste pagina op waar de nieuwe taak staat
     $response = $this->get(route('tasks.index', ['page' => $lastPage]));
+
+    // Controleer dat 'N/A' voorkomt in de response
     $response->assertSee('N/A');
+
+    // Controleer dat de taak zelf wel wordt getoond
+    $response->assertSee((string) $task->id);
+    $response->assertSee(Str::limit($task->task, 50));
 })->group('Opdracht19');
 
+// Test specifiek voor taken zonder einddatum (enddate = null)
+test('tasks index page displays empty string for tasks without enddate', function () {
+    // Maak een taak aan zonder einddatum
+    $task = Task::factory()->create([
+        'enddate' => null,
+        'user_id' => User::first()->id,
+        'project_id' => Project::first()->id,
+        'activity_id' => Activity::first()->id,
+    ]);
+
+    // Haal het totale aantal pagina's op
+    $totalTasks = Task::count();
+    $tasksPerPage = 15;
+    $lastPage = (int) ceil($totalTasks / $tasksPerPage);
+
+    // Haal de laatste pagina op waar de nieuwe taak staat
+    $response = $this->get(route('tasks.index', ['page' => $lastPage]));
+
+    // Controleer dat de taak wordt getoond
+    $response->assertSee((string) $task->id);
+    $response->assertSee(Str::limit($task->task, 50));
+    $response->assertSee($task->begindate);
+
+    // Voor null enddate is het moeilijk om exact te testen wat er NIET staat
+    // We kunnen wel controleren dat de taak correct wordt weergegeven
+    $responseContent = $response->getContent();
+
+    // Zoek naar de rij van deze specifieke taak en controleer dat er geen datum in de enddate kolom staat
+    $taskRowPattern = '/<tr[^>]*>.*?' . preg_quote((string) $task->id) . '.*?<\/tr>/s';
+    preg_match($taskRowPattern, $responseContent, $matches);
+
+    expect($matches)->not()->toBeEmpty('Task row not found in response');
+
+    // In de gevonden rij, tel het aantal <td> elementen en controleer de enddate kolom (4e kolom)
+    $taskRow = $matches[0];
+    preg_match_all('/<td[^>]*>(.*?)<\/td>/s', $taskRow, $cells);
+
+    // De enddate kolom (index 3, omdat we bij 0 beginnen) moet leeg zijn of alleen whitespace bevatten
+    expect(trim(strip_tags($cells[1][3])))->toBe('');
+})->group('Opdracht19');
+
+// Test voor combinatie van ontbrekende gebruiker EN einddatum
+test('tasks index page handles task with no user and no enddate correctly', function () {
+    // Maak een taak aan zonder gebruiker en zonder einddatum
+    $task = Task::factory()->create([
+        'user_id' => null,
+        'enddate' => null,
+        'project_id' => Project::first()->id,
+        'activity_id' => Activity::first()->id,
+    ]);
+
+    // Haal het totale aantal pagina's op
+    $totalTasks = Task::count();
+    $tasksPerPage = 15;
+    $lastPage = (int) ceil($totalTasks / $tasksPerPage);
+
+    // Haal de laatste pagina op waar de nieuwe taak staat
+    $response = $this->get(route('tasks.index', ['page' => $lastPage]));
+
+    // Controleer dat de taak wordt getoond
+    $response->assertSee((string) $task->id);
+    $response->assertSee(Str::limit($task->task, 50));
+    $response->assertSee($task->begindate);
+    $response->assertSee('N/A'); // Voor de gebruiker
+
+    // Controleer dat de project en activity wel correct worden getoond
+    $response->assertSee($task->project->name);
+    $response->assertSee($task->activity->name);
+})->group('Opdracht19');
 // Test of de paginering werkt op de tasks index pagina
 test('tasks index page pagination works', function () {
     $initialTaskCount = Task::count(); // Aantal taken dat al door de seeders is aangemaakt
