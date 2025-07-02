@@ -13,7 +13,6 @@ beforeEach(function () {
     $this->seed('ProjectSeeder');
     $this->seed('TaskSeeder');
 });
-
 // Test of de gegevens correct in de database worden bijgewerkt
 test('task is updated correctly in the database when using correct data and showing flash message', function () {
     $user = User::where('email', 'student@school.nl')->first();
@@ -48,12 +47,12 @@ test('task is updated correctly in the database when using correct data and show
     ]);
 
     // Assert of de melding met session wordt gebruikt
-    $response->assertSessionHas('status', 'Taak: Bijgewerkte Taak Beschrijving is bijgewerkt');
+    $response->assertSessionHas('status', 'Taak: Bijgewerkte Taak Beschrijving is gewijzigd');
 
     // Volg de redirect en check of de flash message op het scherm staat
     $this->followingRedirects()
         ->get(route('tasks.index'))
-        ->assertSee('Taak: Bijgewerkte Taak Beschrijving is bijgewerkt');
+        ->assertSee('Taak: Bijgewerkte Taak Beschrijving is gewijzigd');
 })->group('Opdracht25');
 
 // Test voor taakbeschrijving minimale lengte
