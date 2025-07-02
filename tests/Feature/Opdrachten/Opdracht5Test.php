@@ -88,5 +88,6 @@ test('The Project model should have correctly set guarded attributes', function 
     $expectedGuarded = ['name', 'description'];
 
     // Assert that the actual guarded fields in the model match the expected guarded fields
-    $this->assertEquals($expectedGuarded, $project->getGuarded());
+    //$this->assertEquals($expectedGuarded, $project->getGuarded());
+    $this->assertEqualsCanonicalizing($expectedGuarded, $project->getGuarded());
 })->group('Opdracht5');
