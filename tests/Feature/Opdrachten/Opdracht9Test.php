@@ -10,10 +10,12 @@ beforeEach(function (){
 test('delete project page is visable', function()
 {
     $this->withoutExceptionHandling();
+    $escapedNameValue = htmlspecialchars($this->project->name, ENT_QUOTES);
+    $escapedDescriptionValue = htmlspecialchars($this->project->description, ENT_QUOTES);
     $this->get(route('projects.delete',['project' => $this->project->id]))
         ->assertViewIs('admin.projects.delete')
-        ->assertSee($this->project->name)
-        ->assertSee($this->project->description)
+        ->assertSee($escapedNameValue)
+        ->assertSee($escapedDescriptionValue)
         ->assertStatus(200);
 })->group('Opdracht9');
 

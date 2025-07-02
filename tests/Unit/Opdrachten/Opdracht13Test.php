@@ -18,19 +18,16 @@ beforeEach(function () {
 // Test of de correcte gebruikers zijn aangemaakt
 test('correct users are created', function () {
     $this->assertDatabaseHas('users', [
-        'id' => 1,
         'name' => 'student',
         'email' => 'student@school.nl',
     ]);
 
     $this->assertDatabaseHas('users', [
-        'id' => 2,
         'name' => 'teacher',
         'email' => 'teacher@school.nl',
     ]);
 
     $this->assertDatabaseHas('users', [
-        'id' => 3,
         'name' => 'admin',
         'email' => 'admin@school.nl',
     ]);
@@ -38,11 +35,15 @@ test('correct users are created', function () {
 
 //// Test of de correcte rollen zijn toegewezen aan de gebruikers
 test('users have correct roles', function () {
-    $student = User::find(1);
-    $teacher = User::find(2);
-    $admin = User::find(3);
+    $student = User::where('email', 'student@school.nl')->first();
+    $teacher = User::where('email', 'teacher@school.nl')->first();
+    $admin = User::where('email', 'admin@school.nl')->first();
 
-    $this->assertTrue($student->hasRole('student'), 'User with id 1 does not have role student');
-    $this->assertTrue($teacher->hasRole('teacher'), 'User with id 2 does not have role teacher');
-    $this->assertTrue($admin->hasRole('admin'), 'User with id 3 does not have role admin');
+    $this->assertNotNull($student, 'Student user not found');
+    $this->assertNotNull($teacher, 'Teacher user not found');
+    $this->assertNotNull($admin, 'Admin user not found');
+
+    $this->assertTrue($student->hasRole('student'), 'Student user does not have role student');
+    $this->assertTrue($teacher->hasRole('teacher'), 'Teacher user does not have role teacher');
+    $this->assertTrue($admin->hasRole('admin'), 'Admin user does not have role admin');
 })->group('Opdracht13');

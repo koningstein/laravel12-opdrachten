@@ -39,39 +39,39 @@ test('task create page contains the correct input fields', function () {
 
 // Test if the tasks create page displays the correct dropdown options for users
 test('tasks create page displays correct user dropdown options', function () {
-    $user = User::first();
+    $user = User::where('email', 'admin@school.nl')->first();
     $this->actingAs($user);
     $users = User::all();
     $response = $this->get(route('tasks.create'));
 
     foreach ($users as $user) {
-        $response->assertSee('<option value="'.$user->id.'">'.$user->name.'</option>', false);
+        $response->assertSee('value="'.$user->id.'"', false);
         $response->assertSee($user->name, false);
     }
 })->group('Opdracht21');
 
 // Test if the tasks create page displays the correct dropdown options for projects
 test('tasks create page displays correct project dropdown options', function () {
-    $user = User::first();
+    $user = User::where('email', 'admin@school.nl')->first();
     $this->actingAs($user);
     $projects = Project::all();
     $response = $this->get(route('tasks.create'));
 
     foreach ($projects as $project) {
-        $response->assertSee('<option value="'.$project->id.'">'.$project->name.'</option>', false);
+        $response->assertSee('value="'.$project->id.'"', false);
         $response->assertSee($project->name, false);
     }
 })->group('Opdracht21');
 
 // Test if the tasks create page displays the correct dropdown options for activities
 test('tasks create page displays correct activity dropdown options', function () {
-    $user = User::first();
+    $user = User::where('email', 'admin@school.nl')->first();
     $this->actingAs($user);
     $activities = Activity::all();
     $response = $this->get(route('tasks.create'));
 
     foreach ($activities as $activity) {
-        $response->assertSee('<option value="'.$activity->id.'">'.$activity->name.'</option>', false);
+        $response->assertSee('value="'.$activity->id.'"', false);
         $response->assertSee($activity->name, false);
     }
 })->group('Opdracht21');

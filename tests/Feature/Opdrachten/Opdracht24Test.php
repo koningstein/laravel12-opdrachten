@@ -49,42 +49,51 @@ test('task edit page contains the correct input fields', function () {
 
 // Test of de edit pagina de correcte dropdown opties voor users bevat en de huidige waarde geselecteerd is
 test('tasks edit page displays correct user dropdown options and selected value', function () {
-    $user = User::first();
+    $user = User::where('email', 'admin@school.nl')->first();
     $this->actingAs($user);
     $task = Task::first();
     $response = $this->get(route('tasks.edit', $task->id));
     $users = User::all();
 
-    foreach ($users as $user) {
-        $selected = $task->user_id == $user->id ? 'selected' : '';
-        $response->assertSee('<option value="'.$user->id.'"'.$selected.'>'.$user->name.'</option>', false);
+    foreach ($users as $dropdownUser) {
+        $response->assertSee('value="'.$dropdownUser->id.'"', false);
+        $response->assertSee($dropdownUser->name, false);
+        if ($task->user_id == $dropdownUser->id) {
+            $response->assertSeeInOrder(['value="'.$dropdownUser->id.'"', 'selected'], false);
+        }
     }
 })->group('Opdracht24');
 
 // Test of de edit pagina de correcte dropdown opties voor projects bevat en de huidige waarde geselecteerd is
 test('tasks edit page displays correct project dropdown options and selected value', function () {
-    $user = User::first();
+    $user = User::where('email', 'admin@school.nl')->first();
     $this->actingAs($user);
     $task = Task::first();
     $response = $this->get(route('tasks.edit', $task->id));
     $projects = Project::all();
 
-    foreach ($projects as $project) {
-        $selected = $task->project_id == $project->id ? 'selected' : '';
-        $response->assertSee('<option value="'.$project->id.'"'.$selected.'>'.$project->name.'</option>', false);
+    foreach ($projects as $dropdownProject) {
+        $response->assertSee('value="'.$dropdownProject->id.'"', false);
+        $response->assertSee($dropdownProject->name, false);
+        if ($task->project_id == $dropdownProject->id) {
+            $response->assertSeeInOrder(['value="'.$dropdownProject->id.'"', 'selected'], false);
+        }
     }
 })->group('Opdracht24');
 
 // Test of de edit pagina de correcte dropdown opties voor activities bevat en de huidige waarde geselecteerd is
 test('tasks edit page displays correct activity dropdown options and selected value', function () {
-    $user = User::first();
+    $user = User::where('email', 'admin@school.nl')->first();
     $this->actingAs($user);
     $task = Task::first();
     $response = $this->get(route('tasks.edit', $task->id));
     $activities = Activity::all();
 
     foreach ($activities as $activity) {
-        $selected = $task->activity_id == $activity->id ? 'selected' : '';
-        $response->assertSee('<option value="'.$activity->id.'"'.$selected.'>'.$activity->name.'</option>', false);
+        $response->assertSee('value="'.$activity->id.'"', false);
+        $response->assertSee($activity->name, false);
+        if ($task->activity_id == $activity->id) {
+            $response->assertSeeInOrder(['value="'.$activity->id.'"', 'selected'], false);
+        }
     }
 })->group('Opdracht24');

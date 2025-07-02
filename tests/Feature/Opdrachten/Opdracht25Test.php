@@ -13,6 +13,7 @@ beforeEach(function () {
     $this->seed('ProjectSeeder');
     $this->seed('TaskSeeder');
 });
+
 // Test of de gegevens correct in de database worden bijgewerkt
 test('task is updated correctly in the database when using correct data and showing flash message', function () {
     $user = User::where('email', 'student@school.nl')->first();

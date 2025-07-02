@@ -10,10 +10,12 @@ beforeEach(function (){
 test('edit project page is visable', function()
 {
     $this->withoutExceptionHandling();
+    $escapedNameValue = htmlspecialchars($this->project->name, ENT_QUOTES);
+    $escapedDescriptionValue = htmlspecialchars($this->project->description, ENT_QUOTES);
     $this->get(route('projects.edit',['project' => $this->project->id]))
         ->assertViewIs('admin.projects.edit')
-        ->assertSee($this->project->name)
-        ->assertSee($this->project->description)
+        ->assertSee($escapedNameValue)
+        ->assertSee($escapedDescriptionValue)
         ->assertStatus(200);
 })->group('Opdracht8');
 

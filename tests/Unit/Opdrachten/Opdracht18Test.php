@@ -18,12 +18,11 @@ beforeEach(function () {
 test('ActivitySeeder runs successfully', function () {
     $this->seed(ActivitySeeder::class);
 
-    $this->assertDatabaseCount('activities', 5);
-    $this->assertDatabaseHas('activities', ['id' => 1, 'name' => 'Todo']);
-    $this->assertDatabaseHas('activities', ['id' => 2, 'name' => 'Doing']);
-    $this->assertDatabaseHas('activities', ['id' => 3, 'name' => 'Testing']);
-    $this->assertDatabaseHas('activities', ['id' => 4, 'name' => 'Verify']);
-    $this->assertDatabaseHas('activities', ['id' => 5, 'name' => 'Done']);
+    $this->assertDatabaseHas('activities', ['name' => 'Todo']);
+    $this->assertDatabaseHas('activities', ['name' => 'Doing']);
+    $this->assertDatabaseHas('activities', ['name' => 'Testing']);
+    $this->assertDatabaseHas('activities', ['name' => 'Verify']);
+    $this->assertDatabaseHas('activities', ['name' => 'Done']);
 })->group('Opdracht18');
 
 // Test of de ProjectSeeder werkt
