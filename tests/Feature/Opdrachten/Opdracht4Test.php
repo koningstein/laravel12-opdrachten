@@ -20,9 +20,11 @@ test('The project admin index page shows all projects', function() {
     // Testen
     $response = $this->get(route('projects.index'))->assertViewIs('admin.projects.index');
     foreach ($projects as $project) {
+        $escapedNameValue = htmlspecialchars($project->name, ENT_QUOTES);
+        $escapedDescriptionValue = htmlspecialchars($project->description, ENT_QUOTES);
         $response->assertSee((string)$project->id);
-        $response->assertSee($project->name); // Voeg false toe als je exacte matches wilt vermijden
-        $response->assertSee(Str::limit($project->description, 50));
+        $response->assertSee($escapedNameValue); // Voeg false toe als je exacte matches wilt vermijden
+        $response->assertSee(Str::limit($escapedDescriptionValue, 50));
     }
     $response->assertStatus(200);
 })->group('Opdracht4');
@@ -36,12 +38,11 @@ test('The project admin index page shows all projects from Seeder', function() {
     // Testen
     $response = $this->get(route('projects.index'))->assertViewIs('admin.projects.index');
     foreach ($projects as $project) {
+        $escapedNameValue = htmlspecialchars($project->name, ENT_QUOTES);
+        $escapedDescriptionValue = htmlspecialchars($project->description, ENT_QUOTES);
         $response->assertSee((string)$project->id);
-        $response->assertSee($project->name); // Voeg false toe als je exacte matches wilt vermijden
-        $response->assertSee(Str::limit($project->description, 50));
+        $response->assertSee($escapedNameValue); // Voeg false toe als je exacte matches wilt vermijden
+        $response->assertSee(Str::limit($escapedDescriptionValue, 50));
     }
     $response->assertStatus(200);
 })->group('Opdracht4');
-
-
-
