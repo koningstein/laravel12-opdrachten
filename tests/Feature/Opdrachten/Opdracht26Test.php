@@ -31,7 +31,6 @@ test('task delete page contains the correct input fields', function () {
     $task = Task::with('user', 'project', 'activity')->first();
 
     $response = $this->get(route('tasks.delete', $task->id));
-
     $response->assertSee('name="task"', false);
     $response->assertSee('name="begindate"', false);
     $response->assertSee('name="enddate"', false);
