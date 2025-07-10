@@ -13,22 +13,18 @@ Deze repository is voor studenten die aan de slag willen met het leren van Larav
 geschreven is om stap voor stap het framework te leren. De eisen van de opdrachten staan dan ook in het document beschreven, met daarbij
 het commando wat je kan uitvoeren als controle.
 
-## De opdracht
-
-Voor de opdracht zal je aan de slag gaan met een project tool. Dit is om bij te houden hoever een project staat, welke taken er zijn en
-wie de taken moeten uitvoeren. De functionaliteit bestaat uit het volgende:
-
+🎯 De Opdracht: Project Management Tool
+Voor de opdracht ga je aan de slag met een project management tool. Dit is om bij te houden hoever een project staat, welke taken er zijn en wie de taken moeten uitvoeren. De functionaliteit bestaat uit het volgende:
 <ul>
-<li>Studenten kunnen een project aanmaken</li>
-<li>Bij een project kunnen allerlei taken horen</li>
-<li>Een taak heeft een status, bijvoorbeeld: Todo, Doing, Testing, Verify, Done</li>
-<li>Een taak kan verschillende labels hebben, zoals: front-end, backend, documentation, bug, feature</li>
+<li><strong>Projecten</strong>: Studenten kunnen projecten aanmaken en beheren</li>
+<li><strong>Taken</strong>: Bij een project kunnen allerlei taken horen</li>
+<li><strong>Activiteiten</strong>: Een taak heeft een status/activiteit, bijvoorbeeld: Todo, Doing, Testing, Verify, Done</li>
+<li><strong>Labels</strong>: Een taak kan verschillende labels hebben, zoals: frontend, backend, documentation, bug, feature</li>
+<li><strong>Gebruikers</strong>: Taken kunnen worden toegewezen aan verschillende gebruikers</li>
 </ul>
 
 En ja, het ziet er misschien lastig uit, maar de opdrachten zullen steeds een klein stapje zijn. De opdrachten zullen ook heel precies zijn,
 er zijn namelijk automatische testen beschikbaar waar op alle details wordt gelet.
-
-#
 
 ## De installatie (bijv wampserver)
 Voer de volgende stappen uit om met deze opdrachten aan de slag te gaan.
@@ -46,171 +42,104 @@ Voer de volgende stappen uit om met deze opdrachten aan de slag te gaan.
 
 Gebruik je een andere omgeving, dan zal je soortgelijke stappen moeten nemen om de opdrachten klaar te zetten.
 
+<h1>🛠️ Kerntechnieken</h1>
+<h2>Fundamentele Concepten</h2>
+<ul>
+<li><strong>MVC Design Pattern</strong>: Clean code architectuur</li>
+<li><strong>ORM (Eloquent)</strong>: Database communicatie zonder SQL</li>
+<li><strong>Laravel Conventies</strong>: Professionele naamgeving en structuur</li>
+</ul>
+<h2>Database & Datamodeling</h2>
+<ul>
+<li><strong>Models</strong>: Eloquent models voor elke entiteit</li>
+<li><strong>Migrations</strong>: Database schema beheer in code</li>
+<li><strong>Seeders</strong>: Testdata generatie</li>
+<li><strong>Factories</strong>: Automated fake data met relaties</li>
+<li><strong>Relationships</strong>: BelongsTo en HasMany koppelingen</li>
+</ul>
+<h2>Frontend Development</h2>
+<ul>
+<li><strong>Blade Templates</strong>: Laravel's template engine</li>
+<li><strong>Master Pages</strong>: Herbruikbare layouts met <code>@extends</code> en <code>@yield</code></li>
+<li><strong>Livewire Starterkit</strong>: Interactieve componenten (vervangt Breeze in Laravel 12)</li>
+<li><strong>TailwindCSS</strong>: Modern utility-first styling</li>
+<li><strong>Responsive Design</strong>: Mobile-first development</li>
+</ul>
+<h2>Controllers & Routing</h2>
+<ul>
+<li><strong>Resource Controllers</strong>: Complete CRUD operaties
+<ul>
+<li><code>index</code> - Overzichtspagina's</li>
+<li><code>create</code> - Formulieren voor nieuwe items</li>
+<li><code>store</code> - Opslaan van nieuwe data</li>
+<li><code>show</code> - Detailpagina's</li>
+<li><code>edit</code> - Bewerkingsformulieren</li>
+<li><code>update</code> - Bijwerken van bestaande data</li>
+<li><code>destroy</code> - Verwijderen van items</li>
+</ul>
+</li>
+<li><strong>Named Routes</strong>: Onderhoudbare URL structuur</li>
+<li><strong>Route Middleware</strong>: Beveiliging en toegangscontrole</li>
+</ul>
+<h2>Formulieren & Validatie</h2>
+<ul>
+<li><strong>Form Request Validation</strong>: Aparte validatieklassen</li>
+<li><strong>Validation Rules</strong>: <code>required</code>, <code>string</code>, <code>unique</code>, <code>min/max</code>, <code>exists</code></li>
+<li><strong>Error Handling</strong>: Gebruiksvriendelijke foutmeldingen</li>
+<li><strong>Old Input</strong>: Behouden formulierdata bij fouten</li>
+<li><strong>Flash Messages</strong>: Successmeldingen na acties</li>
+</ul>
+<h2>Authenticatie & Beveiliging</h2>
+<ul>
+<li><strong>User Authentication</strong>: Volledige login/logout functionaliteit</li>
+<li><strong>Roles & Permissions</strong>: Spatie Laravel-Permission package</li>
+<li><strong>Middleware</strong>: Route bescherming</li>
+<li><strong>Authorization</strong>: Controller-level toegangscontrole</li>
+</ul>
+<h2>Development Tools</h2>
+<ul>
+<li><strong>Artisan Commands</strong>:
+<ul>
+<li><code>make:model --all</code> - Complete CRUD setup</li>
+<li><code>make:request</code> - Validatieklassen</li>
+<li><code>make:migration</code> - Database wijzigingen</li>
+<li><code>make:seeder</code> - Testdata generators</li>
+</ul>
+</li>
+<li><strong>Composer</strong>: Package management</li>
+<li><strong>Git Integration</strong>: Versiebeheer voor team development</li>
+</ul>
+
+<h2>📋 Complete Opdrachten Overzicht</h2>
+<ul>
+<li><strong>Opdracht 1</strong>: Model en Migration - Project tabel aanmaken</li>
+<li><strong>Opdracht 2</strong>: Factory & Seeder - Project testdata genereren</li>
+<li><strong>Opdracht 3</strong>: Resource Controller - ProjectController aanmaken</li>
+<li><strong>Opdracht 4</strong>: Index - Project overzichtspagina bouwen</li>
+<li><strong>Opdracht 5</strong>: Create & Store - Project toevoegen functionaliteit</li>
+<li><strong>Opdracht 6</strong>: Validatie - ProjectStoreRequest implementeren</li>
+<li><strong>Opdracht 7</strong>: Show - Project detailpagina</li>
+<li><strong>Opdracht 8</strong>: Edit & Update - Project bewerkingsfunctionaliteit</li>
+<li><strong>Opdracht 9</strong>: Delete & Destroy - Project verwijderen</li>
+<li><strong>Opdracht 10</strong>: Publieke Pagina - Categorieën publiek tonen</li>
+<li><strong>Opdracht 11</strong>: Publieke Projects - Project overzicht voor bezoekers</li>
+<li><strong>Opdracht 12</strong>: Roles & Permissions - Gebruikersrechten systeem</li>
+<li><strong>Opdracht 13</strong>: User Seeder - Test gebruikers aanmaken</li>
+<li><strong>Opdracht 14</strong>: Middleware Routes - Route beveiliging</li>
+<li><strong>Opdracht 15</strong>: Rolgebaseerde Toegang - Permissies aan controllers koppelen</li>
+<li><strong>Opdracht 16</strong>: Task & Activity Models - Database structuur voor taken</li>
+<li><strong>Opdracht 17</strong>: Activity & Task Factory - Testdata voor taken</li>
+<li><strong>Opdracht 18</strong>: Activity & Task Seeder - Database vullen met taken</li>
+<li><strong>Opdracht 19</strong>: Task Index - Taken overzichtspagina</li>
+<li><strong>Opdracht 20</strong>: Task Permissions - Rechten voor taken beheer</li>
+<li><strong>Opdracht 21</strong>: Task Create - Nieuwe taken aanmaken</li>
+<li><strong>Opdracht 22</strong>: Task Store & Validatie - Taken opslaan met controles</li>
+<li><strong>Opdracht 23</strong>: Task Show - Taak detailpagina</li>
+<li><strong>Opdracht 24</strong>: Task Edit - Taken bewerken</li>
+<li><strong>Opdracht 25</strong>: Task Update & Validatie - Taken bijwerken</li>
+<li><strong>Opdracht 26</strong>: Task Delete - Verwijderen bevestigingspagina</li>
+<li><strong>Opdracht 27</strong>: Task Destroy - Taken definitief verwijderen</li>
+</ul>
+
 ## Contact
 Wil je ook aan de slag met deze opdrachten en heb je hiervoor de lessenserie met opdracht beschrijvingen nodig. Neem dan contact op met mij via m.koningstein@tcrmbo.nl
-
-# Wijzigingen
-
-Let op, de volgende wijzigingen zijn doorgevoerd bij de opdrachten:
-<ol>
-<li>Bij opdracht1 is nu een aparte test. Test is uit te voeren met: .\vendor\bin\pest --group=Opdracht1 </li>
-<li>Bij opdracht2 is nu een aparte test. Test is uit te voeren met: .\vendor\bin\pest --group=Opdracht2
-<ul>
-<li>De Factory moet de volgende naam hebben: ProjectFactory</li>
-<li>De Seeder moet de volgende naam hebben: ProjectSeeder</li>
-</ul></li>
-<li>Bij opdracht3 is nu een nieuwe test. Test is uit te voeren met: .\vendor\bin\pest --group=Opdracht3 
-<ul>
-<li>De naam van de masterpage moet zijn: adminlayout.blade.php</li>
-<li>Op de pagina moet ergens de volgende tekst staan: Laravel Opdrachten</li>
-<li>Zorg dat deze layout zichtbaar op de pagina komt als in de url alleen een ‘/admin’ staat.</li>
-</ul></li>
-<li>Bij opdracht4 is nu een nieuwe test. Test is uit te voeren met: .\vendor\bin\pest --group=Opdracht4 
-<ul>
-<li>De named route moet zijn: projects.index</li>
-<li>De id's worden nu ook werkelijk gecontrolleerd, met nieuwe projects en door middel van seed.</li>
-<li>De description wordt meegenomen in de test. Daarnaast moet deze in de index max 50 characters zijn</li>
-</ul></li>
-<li>Bij opdracht5 is de test aangepast. Test is uit te voeren met: .\vendor\bin\pest --group=Opdracht5 
-<ul><li>Het formulier:<ul>
-<li>Er is een input voor: name.</li>
-<li>Er is een textarea voor: description.</li>
-<li>De action gebruikt de correcte named route.</li>
-</ul></li>
-<li>Het bewaren van data:<ul>
-<li>Er is een name en description. </li>
-<li>Mass assignment mag niet mogelijk zijn.</li>
-<li>In de model wordt gebruik gemaakt van $guarded voor name & description.</li>
-<li>In de database komt de correcte name & description.</li>
-<li>Nadat het is opgeslagen word je automatisch naar de index gestuurd met de melding dat het project is toegevoegd.</li>
-</ul></li></ul>
-<li>Bij opdracht6 wordt nu getest of :
-<ul><li>je werkelijk gebruik maakt van een aparte validatie request: ProjectStoreRequest</li>
-<li>De foutmeldingen bij validatie errors op het scherm komen</li>
-<li>Na correct opslaan er een redirect naar project.index wordt gebruikt, met gebruik van een flash message</li>
-<li>De melding bij opslaan in de index getoond wordt: Project {projectnaam} is aangemaakt</li>
-</ul></li>
-<li>Opdracht7: niets aangepast</li>
-<li>Bij opdracht8 wordt nu getest of :
-<ul>
-<li>De correcte action in het formulier staat naar 'projects.update'</li>
-<li>De input velden voor name & description er correct in staan</li>
-<li>je werkelijk gebruik maakt van een aparte validatie request: ProjectUpdateRequest</li>
-<li>De foutmeldingen bij validatie errors op het scherm komen</li>
-<li>Na correct opslaan er een redirect naar project.index wordt gebruikt, met gebruik van een flash message</li>
-<li>De melding bij update in de index getoond wordt: Project {projectnaam} is gewijzigd</li>
-</ul></li>
-<li>Bij opdracht9 wordt nu getest of :
-<ul>
-<li>De correcte action in het formulier staat naar 'projects.update'</li>
-<li>De input velden voor name & description er correct in staan</li>
-<li>Na correct verwijderen er een redirect naar project.index wordt gebruikt, met gebruik van een flash message</li>
-<li>De melding bij delete in de index getoond wordt: Project {projectnaam} is verwijderd</li>
-</ul></li>
-<li>Opdracht10: niets aangepast</li>
-<li>Bij opdracht11 wordt nu getest of :
-<ul>
-<li>De controller moet in de map staan: App/Http/Controllers/Open/ </li>
-<li>De naam van de controller is: ProjectController</li>
-<li>De view moet in de map staan: Resources/views/open/projects/ </li>
-<li>De naam van de view is: index.blade.php</li>
-<li>Op de pagina moeten de id, name en description staan.</li>
-<li>Er moet met pagina's worden gewerkt, met 10 projecten per pagina, waarbij de correcte data wordt getoond.</li>
-</ul></li>
-<li>Bij opdracht12 wordt nu getest of :
-<ul>
-<li>Rollen en permissies correct zijn aangemaakt en toegewezen.</li>
-<li>Permissies correct zijn ingesteld in de controllers.</li>
-</ul></li>
-<li>Bij opdracht13 wordt nu getest of :
-<ul>
-<li>Gebruikers correct zijn aangemaakt en toegewezen aan de juiste rollen.</li>
-<li>De gebruiker correct kan inloggen en de juiste permissies heeft.</li>
-</ul></li>
-<li>Bij opdracht14 wordt nu getest of :
-<ul>
-<li>De middleware correct is ingesteld voor de routes.</li>
-<li>De routes correct zijn beveiligd met de juiste permissies.</li>
-</ul></li>
-<li>Bij opdracht15 wordt nu getest of :
-<ul>
-<li>Rollen en permissies correct zijn ingesteld voor toegang tot projectbeheer.</li>
-<li>De projectbeheerfunctionaliteit correct werkt voor gebruikers met de juiste rollen en permissies.</li>
-</ul></li>
-<li>Bij opdracht16 wordt nu getest of :
-<ul>
-<li>De tabel 'tasks' correct is aangemaakt met de juiste kolommen en datatypes.</li>
-<li>De relaties tussen 'tasks', 'users', 'projects' en 'activities' correct zijn gedefinieerd met de juiste foreign key constraints.</li>
-<li>De juiste migraties en modellen zijn aangemaakt voor 'tasks' en 'activities'.</li>
-</ul></li>
-<li>Bij opdracht17 wordt nu getest of :
-<ul>
-<li>De factory voor 'tasks' correct is aangemaakt en data kan genereren die voldoet aan de kolomgrootte en validatievoorwaarden.</li>
-<li>De gegenereerde data wordt opgeslagen in de database en voldoet aan de vereisten.</li>
-</ul></li>
-<li>Bij opdracht18 wordt nu getest of :
-<ul>
-<li>De seeder voor 'tasks' correct is aangemaakt en minimaal 10 taken genereert.</li>
-<li>De gegenereerde data correct in de database wordt opgeslagen.</li>
-<li>De juiste volgorde van seeding is gewaarborgd.</li>
-</ul></li>
-<li>Bij opdracht19 wordt nu getest of :
-<ul>
-<li>De resource controller voor 'tasks' correct is aangemaakt met de juiste named routes.</li>
-<li>De indexpagina voor taken binnen de masterpage correct wordt weergegeven.</li>
-<li>De indexpagina de juiste taken weergeeft met alle vereiste kolommen en data.</li>
-<li>De paginering op de indexpagina correct werkt.</li>
-<li>De show-, edit-, en delete-links correct worden weergegeven op de indexpagina.</li>
-</ul></li>
-<li>Bij opdracht20 wordt nu getest of :
-<ul>
-<li>De permissies voor 'tasks' correct zijn aangemaakt en toegewezen aan de juiste rollen.</li>
-<li>De toegang tot de verschillende methoden van de 'tasks' controller correct is beveiligd met de juiste permissies.</li>
-<li>De juiste middleware voor permissiebeheer wordt gebruikt in de controller.</li>
-</ul></li>
-<li>Bij opdracht21 wordt nu getest of :
-<ul>
-<li>De create methode van de 'tasks' controller correct werkt en de juiste view retourneert.</li>
-<li>Het create formulier de juiste inputvelden bevat en de correcte dropdown opties toont voor 'users', 'projects' en 'activities'.</li>
-<li>De juiste action en method voor het formulier zijn ingesteld.</li>
-</ul></li>
-<li>Bij opdracht22 wordt nu getest of :
-<ul>
-<li>De store methode van de 'tasks' controller correct werkt en de gegevens valideert en opslaat in de database.</li>
-<li>De juiste validatieregels worden toegepast en foutmeldingen correct worden weergegeven bij validatie errors.</li>
-<li>Mass assignment niet mogelijk is door het correct instellen van de guarded eigenschappen in het model.</li>
-<li>Na correct opslaan er een redirect naar de indexpagina wordt gebruikt met een flash message.</li>
-</ul></li>
-<li>Bij opdracht23 wordt nu getest of :
-<ul>
-<li>De show methode van de 'tasks' controller correct werkt en de juiste view retourneert.</li>
-<li>De show view de correcte gegevens van de taak weergeeft.</li>
-</ul></li>
-<li>Bij opdracht24 wordt nu getest of :
-<ul>
-<li>De edit methode van de 'tasks' controller correct werkt en de juiste view retourneert.</li>
-<li>Het edit formulier de juiste inputvelden bevat met de correcte vooraf ingevulde gegevens van de taak.</li>
-<li>De correcte dropdown opties toont voor 'users', 'projects' en 'activities' met de huidige waarden geselecteerd.</li>
-<li>De juiste action en method voor het formulier zijn ingesteld.</li>
-</ul></li>
-<li>Bij opdracht25 wordt nu getest of :
-<ul>
-<li>De update methode van de 'tasks' controller correct werkt en de gegevens valideert en bijwerkt in de database.</li>
-<li>De juiste validatieregels worden toegepast en foutmeldingen correct worden weergegeven bij validatie errors.</li>
-<li>Mass assignment niet mogelijk is door het correct instellen van de guarded eigenschappen in het model.</li>
-<li>Na correct bijwerken er een redirect naar de indexpagina wordt gebruikt met een flash message.</li>
-<li>De update methode de TaskStoreRequest gebruikt voor validatie.</li>
-</ul></li>
-<li>Bij opdracht26 wordt nu getest of :
-<ul>
-<li>De delete methode van de 'tasks' controller correct werkt en de juiste view retourneert.</li>
-<li>De delete view de correcte gegevens van de taak weergeeft met alle inputvelden disabled.</li>
-<li>De juiste action en method voor het formulier zijn ingesteld.</li>
-</ul></li>
-<li>Bij opdracht27 wordt nu getest of :
-<ul>
-<li>De destroy methode van de 'tasks' controller correct werkt en de taak verwijdert uit de database.</li>
-<li>Na correct verwijderen er een redirect naar de indexpagina wordt gebruikt met een flash message.</li>
-</ul></li>
-</ol>
-# laravel12-opdrachten
