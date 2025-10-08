@@ -82,27 +82,47 @@ test('tasks index page displays empty string for tasks without enddate', functio
     // Haal de laatste pagina op waar de nieuwe taak staat
     $response = $this->get(route('tasks.index', ['page' => $lastPage]));
 
-    // Controleer dat de taak wordt getoond
+    // Controleer dat de taak wordt getoond met de andere verplichte velden
     $response->assertSee((string) $task->id);
     $response->assertSee(Str::limit($task->task, 50));
     $response->assertSee($task->begindate);
+    $response->assertSee($task->user->name);
+    $response->assertSee($task->project->name);
+    $response->assertSee($task->activity->name);
 
-    // Voor null enddate is het moeilijk om exact te testen wat er NIET staat
-    // We kunnen wel controleren dat de taak correct wordt weergegeven
+    // Maak nu een vergelijkbare taak MET een enddate
+    $taskWithEnddate = Task::factory()->create([
+        'enddate' => '2025-12-31',
+        'user_id' => User::first()->id,
+        'project_id' => Project::first()->id,
+        'activity_id' => Activity::first()->id,
+    ]);
+
+    // Haal de pagina opnieuw op
+    $totalTasks = Task::count();
+    $lastPage = (int) ceil($totalTasks / $tasksPerPage);
+    $response = $this->get(route('tasks.index', ['page' => $lastPage]));
+
+    // De taak MET enddate moet de datum tonen
+    $response->assertSee($taskWithEnddate->enddate);
+
+    // De taak ZONDER enddate mag NIET een datum-achtig patroon tonen naast de task info
+    // We controleren dat in de rij van de task zonder enddate geen extra datum voorkomt
     $responseContent = $response->getContent();
 
-    // Zoek naar de rij van deze specifieke taak en controleer dat er geen datum in de enddate kolom staat
-    $taskRowPattern = '/<tr[^>]*>.*?' . preg_quote((string) $task->id) . '.*?<\/tr>/s';
+    // Zoek de rij met de task zonder enddate
+    $taskRowPattern = '/<tr[^>]*>.*?' . preg_quote((string) $task->id, '/') . '.*?<\/tr>/s';
     preg_match($taskRowPattern, $responseContent, $matches);
 
     expect($matches)->not()->toBeEmpty('Task row not found in response');
 
-    // In de gevonden rij, tel het aantal <td> elementen en controleer de enddate kolom (4e kolom)
     $taskRow = $matches[0];
-    preg_match_all('/<td[^>]*>(.*?)<\/td>/s', $taskRow, $cells);
 
-    // De enddate kolom (index 3, omdat we bij 0 beginnen) moet leeg zijn of alleen whitespace bevatten
-    expect(trim(strip_tags($cells[1][3])))->toBe('');
+    // Tel hoeveel datum-patronen er in deze rij voorkomen
+    // We verwachten er 1 (de begindate), niet 2
+    $dateCount = preg_match_all('/\d{4}-\d{2}-\d{2}/', $taskRow);
+
+    expect($dateCount)->toBe(1, 'Expected only begindate in row, but found ' . $dateCount . ' dates');
 })->group('Opdracht19');
 
 // Test voor combinatie van ontbrekende gebruiker EN einddatum
